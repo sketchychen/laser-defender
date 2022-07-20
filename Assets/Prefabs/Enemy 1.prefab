@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 4b107d2b8dcf2493283de5660f5ec727, type: 3}
+    - target: {fileID: 2670567454124905889, guid: b23c963b624b24f99b69e7de3f3daac4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2670567455046833351, guid: b23c963b624b24f99b69e7de3f3daac4, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -58,6 +62,18 @@ PrefabInstance:
     - target: {fileID: 2670567455046833352, guid: b23c963b624b24f99b69e7de3f3daac4, type: 3}
       propertyPath: m_Name
       value: Enemy 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2670567455046833352, guid: b23c963b624b24f99b69e7de3f3daac4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4511490792211266718, guid: b23c963b624b24f99b69e7de3f3daac4, type: 3}
+      propertyPath: m_Radius
+      value: 0.431153
+      objectReference: {fileID: 0}
+    - target: {fileID: 4511490792211266718, guid: b23c963b624b24f99b69e7de3f3daac4, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.006414175
       objectReference: {fileID: 0}
     - target: {fileID: 6766353975219660366, guid: b23c963b624b24f99b69e7de3f3daac4, type: 3}
       propertyPath: waveConfig
