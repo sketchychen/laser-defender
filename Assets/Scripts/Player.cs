@@ -5,29 +5,47 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 10f;
+    [SerializeField] float paddingTop = 5f;
+    [SerializeField] float paddingBottom = 2f;
+    float paddingLeft = 0.5f;
+    float paddingRight = 0.5f;
 
+    float moveSpeed = 10f;
     Vector2 rawInput;
+    Vector2 minBounds;
+    Vector2 maxBounds;
+
 
     void Start()
     {
-
+        InitBounds();
     }
 
-    // Update is called once per frame
     void Update()
     {
         Move();
     }
 
-    void OnMove(InputValue value)
+    void InitBounds()
     {
-        rawInput = value.Get<Vector2>();
+        Camera mainCamera = Camera.main;
+        minBounds = mainCamera.ViewportToWorldPoint(new Vector2(0, 0));
+        maxBounds = mainCamera.ViewportToWorldPoint(new Vector2(1, 1));
     }
 
     void Move()
     {
-        Vector3 delta = rawInput * moveSpeed * Time.deltaTime;  // velocity = distance / time
-        transform.position += delta;
+        /* velocity = distance / time */
+        Vector3 delta = rawInput * moveSpeed * Time.deltaTime;
+        Vector2 newPos = new Vector2();
+        /* impose boundaries on player movement */
+        newPos.x = Mathf.Clamp(transform.position.x + delta.x, minBounds.x + paddingLeft, maxBounds.x - paddingRight);
+        newPos.y = Mathf.Clamp(transform.position.y + delta.y, minBounds.y + paddingTop, maxBounds.y - paddingBottom);
+        transform.position = newPos;
+    }
+
+    void OnMove(InputValue value)
+    {
+        rawInput = value.Get<Vector2>();
     }
 }
