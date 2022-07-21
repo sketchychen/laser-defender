@@ -17,6 +17,12 @@ public class Shooter : MonoBehaviour
 
     bool isFiring;
     Coroutine firingCoroutine;
+    AudioPlayer audioPlayer;
+
+    void Awake()
+    {
+        audioPlayer = FindObjectOfType<AudioPlayer>();
+    }
 
     void Start()
     {
@@ -57,11 +63,16 @@ public class Shooter : MonoBehaviour
                                             transform.position,
                                             Quaternion.identity);
             Rigidbody2D rb2d = instance.GetComponent<Rigidbody2D>();
+
             if (rb2d != null)
             {
                 rb2d.velocity = transform.up * projectileSpeed;
             }
+
             Destroy(instance, projectileLifetime);
+
+            audioPlayer.PlayShootingClip();
+
             yield return new WaitForSeconds(GetRandomFireRate());
         }
     }
