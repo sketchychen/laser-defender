@@ -22,10 +22,7 @@ public class SpriteScroller : MonoBehaviour
     void Scroll()
     {
         if (material == null) { return; }
-        while(true)
-        {
-            offset = moveVelocity * Time.deltaTime;
-            material.mainTextureOffset += offset;
-        }
+        offset = moveVelocity * Time.deltaTime;
+        material.mainTextureOffset += offset;
     }
 }
