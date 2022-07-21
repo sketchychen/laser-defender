@@ -10,29 +10,30 @@ public class AudioPlayer : MonoBehaviour
 
     [Header("Shooting")]
     [SerializeField] AudioClip shootingClip;
-    [SerializeField] [Range(0f, 1f)] float shootingVolume = 1f;  // Range constrains values within bounds
+    [SerializeField] [Range(0f, 1f)] float shootingVolume = 1f;
+    // Range constrains serialized value within bounds
 
     [Header("Damage")]
     [SerializeField] AudioClip damageClip;
-    [SerializeField] [Range(0f, 1f)] float dmaageVolume = 1f;
+    [SerializeField] [Range(0f, 1f)] float damageVolume = 1f;
 
 
     public void PlayShootingClip()
     {
-        PlayClip(shootingClip);
+        PlayClip(shootingClip, shootingVolume);
     }
 
     public void PlayDamageClip()
     {
-        PlayClip(damageClip);
+        PlayClip(damageClip, damageVolume);
     }
 
-    void PlayClip(AudioClip clip)
+    void PlayClip(AudioClip clip, float volume)
     {
-        if (clip == !null) { return; }
+        if (clip == null) { return; }
         AudioSource.PlayClipAtPoint(clip,
                                     Camera.main.transform.position,
-                                    dmaageVolume);
+                                    volume);
     }
 
 }
