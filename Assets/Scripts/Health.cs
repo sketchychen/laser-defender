@@ -19,15 +19,13 @@ public class Health : MonoBehaviour
     {
         DamageDealer damageDealer = other.GetComponent<DamageDealer>();
 
-        if (damageDealer != null)
-        {
-            // Take damage
-            TakeDamage(damageDealer.GetDamageDealt());
-            // release the explosion particles
-            PlayHitEffect();
-            // tell damage dealer that it hit something
-            damageDealer.Hit();
-        }
+        if (damageDealer == null) { return; }
+        // Take damage
+        TakeDamage(damageDealer.GetDamageDealt());
+        // release the explosion particles
+        PlayHitEffect();
+        // tell damage dealer that it hit something
+        damageDealer.Hit();
     }
 
     void TakeDamage(int damage)
@@ -42,7 +40,8 @@ public class Health : MonoBehaviour
 
     private void ShakeCamera()
     {
-        if (cameraShake != null && applyCameraShake)
+        if (cameraShake == null) { return; }
+        if (applyCameraShake)
         {
             cameraShake.Play();
         }
@@ -50,12 +49,10 @@ public class Health : MonoBehaviour
 
     void PlayHitEffect()
     {
-        if (hitEffect != null)
-        {
-            ParticleSystem instance = Instantiate(hitEffect,
-                                                transform.position,
-                                                Quaternion.identity);
-            Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
-        }
+        if (hitEffect == null) { return; }
+        ParticleSystem instance = Instantiate(hitEffect,
+                                            transform.position,
+                                            Quaternion.identity);
+        Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
     }
 }

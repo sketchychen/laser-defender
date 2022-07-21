@@ -56,9 +56,7 @@ public class Player : MonoBehaviour
 
     void OnFire(InputValue value)
     {
-        if (shooter != null)
-        {
-            shooter.SetIsFiring(value.isPressed);
-        }
+        if (shooter == null) { return; }
+        shooter.SetIsFiring(value.isPressed);
     }
 }
