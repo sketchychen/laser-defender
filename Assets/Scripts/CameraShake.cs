@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
-    [SerializeField] float shakeDuration = 1f;
-    [SerializeField] float shakeMagnitude = 0.5f;
+    [SerializeField] float shakeDuration = 0.5f;
+    [SerializeField] float shakeMagnitude = 0.1f;
 
     Vector3 initialPosition;
 
@@ -21,7 +21,14 @@ public class CameraShake : MonoBehaviour
 
     IEnumerator Shake()
     {
-
+        float elapsedTime = 0;
+        while (elapsedTime < shakeDuration)
+        {
+            transform.position = initialPosition + (Vector3)Random.insideUnitCircle * shakeMagnitude;
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        transform.position = initialPosition;
     }
 
 }
