@@ -8,7 +8,7 @@ public class UIDisplay : MonoBehaviour
 {
     [Header("Health")]
     [SerializeField] Slider healthSlider;
-    Health playerHealth;
+    [SerializeField] Health playerHealth;
 
     [Header("Score")]
     [SerializeField] TextMeshProUGUI scoreText;
@@ -20,15 +20,11 @@ public class UIDisplay : MonoBehaviour
     void Awake()
     {
         scorekeeper = FindObjectOfType<Scorekeeper>();
-        playerHealth = FindObjectOfType<Player>().GetComponent<Health>();
     }
 
     void Start()
     {
-        if (playerHealth != null)
-        {
-            healthSlider.maxValue = playerHealth.GetHealth();
-        }
+        healthSlider.maxValue = playerHealth.GetHealth();
     }
 
     void Update()
@@ -39,17 +35,11 @@ public class UIDisplay : MonoBehaviour
 
     void UpdateScoreText()
     {
-        if (scorekeeper != null)
-        {
-            scoreText.text = $"{scorekeeper.GetScore():000000000}";
-        }
+        scoreText.text = $"{scorekeeper.GetScore():000000000}";
     }
 
     void UpdateHealthSlider()
     {
-        if (playerHealth != null)
-        {
-            healthSlider.value = playerHealth.GetHealth();
-        }
+        healthSlider.value = playerHealth.GetHealth();
     }
 }
