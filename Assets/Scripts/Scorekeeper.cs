@@ -22,7 +22,6 @@ public class Scorekeeper : MonoBehaviour
     {
         score += value;
         Mathf.Clamp(score, 0, int.MaxValue);
-        Debug.Log("scorekeeper: " + score);
     }
 
     public void ResetScore()

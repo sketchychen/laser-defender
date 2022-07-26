@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] float paddingTop = 5f;
-    [SerializeField] float paddingBottom = 2f;
+    float paddingTop = 1f;
+    float paddingBottom = 2f;
     float paddingLeft = 0.5f;
     float paddingRight = 0.5f;
 
@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
         Vector2 newPos = new Vector2();
         /* impose boundaries on player movement */
         newPos.x = Mathf.Clamp(transform.position.x + delta.x, minBounds.x + paddingLeft, maxBounds.x - paddingRight);
-        newPos.y = Mathf.Clamp(transform.position.y + delta.y, minBounds.y + paddingTop, maxBounds.y - paddingBottom);
+        newPos.y = Mathf.Clamp(transform.position.y + delta.y, minBounds.y + paddingBottom, maxBounds.y - paddingTop);
         transform.position = newPos;
     }
 
