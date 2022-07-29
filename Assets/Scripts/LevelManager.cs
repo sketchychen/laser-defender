@@ -5,10 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+    /*
+    Because LevelManager's methods are already hooked up to buttons in-game,
+    turning it into a singleton will be a pain. Soooo we're not gonna.
+    */
+
     [SerializeField] float sceneLoadDelay = 2f;
+    Scorekeeper scorekeeper;
+
+    void Awake()
+    {
+        scorekeeper = FindObjectOfType<Scorekeeper>();
+    }
 
     public void LoadGame()
     {
+        scorekeeper.ResetScore();
         SceneManager.LoadScene("Game");
     }
 

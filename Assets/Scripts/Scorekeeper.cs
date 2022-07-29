@@ -5,13 +5,32 @@ using UnityEngine;
 public class Scorekeeper : MonoBehaviour
 {
     int score = 0;
-
+    static Scorekeeper instance;
     /*
     Create - gameObject
     Read - Get score
     Update - Add points to score
     Destroy - Reset score
     */
+
+    void Awake()
+    {
+        ManageSingleton();
+    }
+
+    void ManageSingleton()
+    {
+        if (instance != null)
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 
     public int GetScore()
     {
@@ -22,6 +41,7 @@ public class Scorekeeper : MonoBehaviour
     {
         score += value;
         Mathf.Clamp(score, 0, int.MaxValue);
+        Debug.Log(score);
     }
 
     public void ResetScore()

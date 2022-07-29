@@ -17,6 +17,33 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] AudioClip damageClip;
     [SerializeField] [Range(0f, 1f)] float damageVolume = 1f;
 
+    /* for ManageSingletonTheBetterWay */
+    static AudioPlayer instance;
+    // 'static' persists through all instances of a class. private static by default
+    /*
+    Optional: create a 'public AudioPlayer GetInstance()'
+    Pros: No need to use FindObjectOfType<AudioPlayer>
+    Cons: a public getter method means easily losing track of where the singleton is used as game scope scales
+    */
+
+    void Awake()
+    {
+        // ManageSingletonTheOldWay();
+        ManageSingletonTheBetterWay();
+    }
+
+    void ManageSingletonTheBetterWay()
+    {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 
     public void PlayShootingClip()
     {
@@ -35,5 +62,19 @@ public class AudioPlayer : MonoBehaviour
                                     Camera.main.transform.position,
                                     volume);
     }
+
+    // void ManageSingletonTheOldWay()
+    // {
+    //     int instanceCount = FindObjectsOfType(GetType()).Length;
+    //     if (instanceCount > 1)
+    //     {
+    //         gameObject.SetActive(false);
+    //         Destroy(gameObject);
+    //     }
+    //     else
+    //     {
+    //         DontDestroyOnLoad(gameObject);
+    //     }
+    // }
 
 }
